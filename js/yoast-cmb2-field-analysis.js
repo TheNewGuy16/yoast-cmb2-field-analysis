@@ -9,22 +9,34 @@
       );
 
       $('#post-body').find(
-        'input[type=text][name*=_cmb2_], textarea[name*=_cmb2_]'
-      ).on('keyup paste cut', function() {
+        'input[yoast-analysis=1]:not(".cmb2-upload-file-id"), textarea[yoast-analysis=1]'
+      ).on('keyup paste cut click', function() {
         YoastSEO.app.pluginReloaded('YoastCMB2FieldAnalysis');
       });
     };
 
     YoastCMB2FieldAnalysis.prototype.addCMB2FieldsToContent = function(data) {
-      var cmb2_content;
-
+	  tinyMCE.triggerSave();
+	  var cmb2_content = '';
       $('#post-body').find(
-        'input[type=text][name*=_cmb2_], textarea[name*=_cmb2_]'
-      ).each(function() { cmb2_content += ' ' + $(this).val(); });
-
+        'input[yoast-analysis=1]:not(".cmb2-upload-file-id"), textarea[yoast-analysis=1]'
+      ).each(function() { 
+		  if( $(this).val() ){
+			  cmb2_content += ' ';
+			  if( $(this).attr('yoast-analysis-before') ){ cmb2_content += $(this).attr('yoast-analysis-before'); }
+			  if( $(this).hasClass('cmb2-upload-file') ){
+				  cmb2_content += '<img src="' + $(this).parent().find('.img-status img').attr('src') + '" alt="' + $(this).parent().find('.img-status img').attr('alt') + '" />';
+			  }
+			  else{
+				cmb2_content += $(this).val();  
+			  }
+			  if( $(this).attr('yoast-analysis-after') ){ cmb2_content += $(this).attr('yoast-analysis-after'); }
+		  }
+	  });
       return data + cmb2_content;
-    };
+	};
 
     new YoastCMB2FieldAnalysis();
+	  
   });
 })(jQuery);
