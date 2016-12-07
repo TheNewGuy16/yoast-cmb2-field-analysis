@@ -21,13 +21,25 @@ your WordPress instance via the Admin screens,
 ## Usage
 
 In order for your CMB2 field content to be calculated in the SEO score, ensure
-that the field name (`id` field for group attributes) contains `_cmb2_`.
-It is a good idea to use this as part of a prefixing structure for your CMB2
-fields but it can also be used in a number of different ways:
+to set a new attribute "yoast-analysis=1" on the field. For example : 
 
--   `_cmb2_hero_banner_text`
--   `_my_theme_cmb2_hero_banner_text` (recommended)
--   `_my_theme_hero_banner_cmb2_`
+```php 
+  $cmb->add_field( array(
+    'name'    => 'Test Text',
+    'desc'    => 'field description (optional)',
+    'default' => 'standard value (optional)',
+    'id'      => 'wiki_test_text',
+    'type'    => 'text',
+    'attributes' => array(
+      'yoast-analysis'		=> '1', // Enable Yoast Analysis for this textField
+      'yoast-analysis-before' 	=> 'BeforeString ', // Optionnal string that must be added before field value
+      'yoast-analysis-after' 	=> ' AfterString', // Optionnal string that must be added after field value
+    )
+) );
+  
+```
+In the example above, if the field value is "helloWorld", Yoast Analysis will add "BeforeString helloWorld AfterString".
+
 
 ## WordPress and Yoast SEO dependencies
 
