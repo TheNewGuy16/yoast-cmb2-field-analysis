@@ -54,8 +54,29 @@ For example:
 ) );
   
 ```
+If you are trying to analyize a text field in a group field you can just add add an attribute just like a regular text field as well as regular textareas.
 
+For example adding attributes fro regular textarea not wysiwyg:
 
+```php 
+	$cmb->add_group_field( $group_field_id, array(
+    'name'    => 'Test textarea',
+    'id'      => 'wiki_test_text',
+    'type'    => 'textarea',
+    'attributes'     => array(
+			'yoast-analysis' => '1',
+		),
+) );
+
+	$cmb->add_group_field( $group_field_id, array(
+    'name'    => 'Test Text Field',
+    'id'      => 'wiki_test_text',
+    'type'    => 'text',
+    'attributes'     => array(
+			'yoast-analysis' => '1',
+		),
+) );
+```
 ## WordPress and Yoast SEO dependencies
 
 Currently, this plugin has been tested up to WordPress
