@@ -21,7 +21,7 @@ your WordPress instance via the Admin screens,
 ## Usage
 
 In order for your CMB2 field content to be calculated in the SEO score, ensure
-to set a new attribute "yoast-analysis=1" on the field. For example : 
+to set a new attribute "yoast-analysis=1" on the field For example : 
 
 ```php 
   $cmb->add_field( array(
@@ -39,6 +39,21 @@ to set a new attribute "yoast-analysis=1" on the field. For example :
   
 ```
 In the example above, if the field value is "helloWorld", Yoast Analysis will add "BeforeString helloWorld AfterString".
+
+If you are trying to analyze a group field that is a wysiwyg editor adding an attribute will not work, you will have to add an extra_class of yoast-analysis to the wysiwyg field options instead
+For example:
+
+```php 
+	$cmb->add_group_field( $group_field_id, array(
+    'name'    => 'Test wysiwyg',
+    'id'      => 'wiki_test_text',
+    'type'    => 'wysiwyg',
+    'options'     => array(
+			'editor_class' => 'yoast-analysis', // add extra class(es) to the editor textarea for yoast analysis
+		),
+) );
+  
+```
 
 
 ## WordPress and Yoast SEO dependencies
