@@ -40,7 +40,7 @@ to set a new attribute "yoast-analysis=1" on the field For example :
 ```
 In the example above, if the field value is "helloWorld", Yoast Analysis will add "BeforeString helloWorld AfterString".
 
-If you are trying to analyze a group field that is a wysiwyg editor adding an attribute will not work, you will have to add an extra_class of yoast-analysis to the wysiwyg field options instead
+If you are trying to analyze a group field that is a wysiwyg editor adding an attribute will not work, you will have to add an extra_class of yoast-analysis to the wysiwyg field options instead.  This also means that you can not set before and after strings on the wysiwyg editor since the attributes will not be added to the field.
 For example:
 
 ```php 
